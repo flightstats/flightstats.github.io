@@ -135,12 +135,12 @@
       border: 1px solid #9c9d9e;
       padding: 10px;
     }
-    #repo-name {
+    .repo-name {
       float:left;
       font-size: 16pt;
       line-height: 1.6em;
     }
-    #view-link {
+    .view-link {
       background: #6d6d6f;
       border: 1px solid #9c9d9e;
       border-radius: 5px;
@@ -149,7 +149,7 @@
       color:#FAA817;
       
     }
-    #repo-description {
+    .repo-description {
       float: left;
       clear: both;
       line-height: 1.6em;
@@ -158,7 +158,7 @@
       padding: 5px 0;
       overflow: auto;
     }
-    #repo-content {
+    .repo-content {
       padding-top: 15px;
       clear: both;
     }
@@ -169,7 +169,7 @@
       color: #9c9d9e;
       width: 140px;
     }
-    #repo-watchers, #repo-forks, #repo-language, #repo-issues, #repo-updated {
+    .repo-watchers, .repo-forks, .repo-language, .repo-issues, .repo-updated {
       float:left;
       color: #464646;
       text-align: left;
@@ -205,6 +205,28 @@
     }
 
   </style>
+
+  <script id="repo-template" type="text/html">
+    <div class="repo-container" id="repo-{{REPO-INDEX}}">
+      <div class="frame">
+        <div class="repo-name">hub</div>
+        <div class="view-link"><a href="https://github.com/flightstats/hub" target="_blank">View in GitHub</a></div>
+        <div class="repo-description">fault tolerant, highly available service for data storage and distribution</div>
+
+        <div class="repo-content">
+          <div class="repo-field">
+            <div class="repo-label">Language</div>
+            <div class="repo-language">Java</div>
+          </div>
+       </div>
+      </div>
+    </div>
+  </script>
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script type="text/javascript" src="js/repos.js"></script>
+
 </head>
 <body>
   <header id="header" class="">
@@ -232,103 +254,7 @@
 
     <div class="content-main">
       <div class="repos-header"><div id="repos-title">FlightStats Repositories</div><div id="repos-showall"><a href="https://github.com/flightstats">Show All</a></div></div>
-      <div class="repos">
-      <!-- all fake data atm -->
-
-        <div class="repo-container">
-          <div class="frame">
-            <div id="repo-name">hub</div>
-            <div id="view-link"><a href="https://github.com/flightstats/hub" target="_blank">View in GitHub</a></div>
-            <div id="repo-description">fault tolerant, highly available service for data storage and distribution</div>
-
-            <div id="repo-content">
-              <div class="repo-field">
-                <div class="repo-label">Stars</div>
-                <div id="repo-watchers">3</div>
-              </div>
-              <div class="repo-field">
-                <div class="repo-label">Forks</div>
-                <div id="repo-forks">1</div>
-              </div>
-              <div class="repo-field">
-                <div class="repo-label">Language</div>
-                <div id="repo-language">Java</div>
-              </div>
-              <div class="repo-field">
-                <div class="repo-label">Open Issues</div>
-                <div id="repo-issues">2</div>
-              </div>
-              <div class="repo-field">
-                <div class="repo-label">Updated</div>
-                <div id="repo-updated">03-20-2015 08:26PM</div>
-             </div>
-           </div>
-          </div>
-        </div>
-
-        <div class="repo-container">
-          <div class="frame">
-            <div id="repo-name">fava</div>
-            <div id="view-link"><a href="https://github.com/flightstats/fava" target="_blank">View in GitHub</a></div>
-            <div id="repo-description">Flightstats' open source java utilities</div>
-
-            <div id="repo-content">
-              <div class="repo-field">
-                <div class="repo-label">Stars</div>
-                <div id="repo-watchers">3</div>
-              </div>
-              <div class="repo-field">
-                <div class="repo-label">Forks</div>
-                <div id="repo-forks">1</div>
-              </div>
-              <div class="repo-field">
-                <div class="repo-label">Language</div>
-                <div id="repo-language">Java</div>
-              </div>
-              <div class="repo-field">
-                <div class="repo-label">Open Issues</div>
-                <div id="repo-issues">2</div>
-              </div>
-              <div class="repo-field">
-                <div class="repo-label">Updated</div>
-                <div id="repo-updated">03-20-2015 08:26PM</div>
-             </div>
-           </div>
-          </div>
-        </div>
-
-        <div class="repo-container">
-          <div class="frame">
-            <div id="repo-name">flex-flight-tracker</div>
-            <div id="view-link"><a href="https://github.com/flightstats/flex-flight-tracker" target="_blank">View in GitHub &zwnj;&#8599;</a></div>
-            <div id="repo-description">A sample animated flight tracker map using Flight Stats Flex API positions data</div>
-
-            <div id="repo-content">
-              <div class="repo-field">
-                <div class="repo-label">Stars</div>
-                <div id="repo-watchers">3</div>
-              </div>
-              <div class="repo-field">
-                <div class="repo-label">Forks</div>
-                <div id="repo-forks">1</div>
-              </div>
-              <div class="repo-field">
-                <div class="repo-label">Language</div>
-                <div id="repo-language">Java</div>
-              </div>
-              <div class="repo-field">
-                <div class="repo-label">Open Issues</div>
-                <div id="repo-issues">2</div>
-              </div>
-              <div class="repo-field">
-                <div class="repo-label">Updated</div>
-                <div id="repo-updated">03-20-2015 08:26PM</div>
-             </div>
-           </div>
-          </div>
-        </div>
-
-      </div>
+      <div class="repos"></div>
     </div>
     <div class="content-side">
       <div class="side-card">
@@ -361,5 +287,6 @@
         <a class="footerCopyrightLink" href='/go/About/copyright.do;jsessionid=222097D4225178DD514065A7FB1C05EA.web3:8009'>&copy; 2015 FlightStats, Inc. - All Rights Reserved<br/></a>
       </div>
   </div>
+
 </body>
 </html>
